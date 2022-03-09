@@ -1,14 +1,13 @@
-
 <?php 
 
+namespace affiche{
 
-$file =  dirname(__FILE__);
-$pieces = explode("wp-content", $file);
+class afficher extends \data\sql{
 
 
-include_once($pieces[0].'wp-content/plugins/menu_header/php/sql.php');
+    function __construct(){
 
-class afficher extends sql{
+    }
 
     function affiche_page($id){
 
@@ -23,6 +22,13 @@ class afficher extends sql{
        
     }
 
+
+
 }
+}    
+
+
+
+
 
 ?>

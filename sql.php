@@ -1,4 +1,5 @@
 <?php
+namespace data{
 
 class sql{
 
@@ -205,6 +206,9 @@ echo "<a href='.$logout.'>Logout</a>";
         
             }
       }
+
+
+    }
 
 }
 

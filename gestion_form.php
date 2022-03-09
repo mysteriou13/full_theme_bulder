@@ -1,5 +1,7 @@
 <?php 
 
+namespace form{
+
 class gestion_form{
 
 
@@ -30,6 +32,8 @@ class gestion_form{
 
     }
 
+
+}
 
 }
 
