@@ -5,8 +5,22 @@ namespace form;
 class create_formulaire extends \data\sql{
 
 
-   function __contruct(){
+   function __construct(){
 
+    $form = prefix."form";
+    $sql = "
+    CREATE TABLE IF NOT EXISTS ".$form." ( 
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `name_form` TEXT NOT NULL , 
+    `name_input` TEXT NOT NULL ,
+    `type_input` TEXT NOT NULL ,
+    `class` TEXT NOT NULL ,
+    `obligatoire` TEXT NOT NULL ,
+
+     PRIMARY KEY (`id`)) ENGINE = InnoDB; 
+    ";
+
+    $this->create_table_menu($sql); 
 
    }
 
