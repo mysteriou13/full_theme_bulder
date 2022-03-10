@@ -1,7 +1,14 @@
 <?php 
 
-class create_formulaire{
+namespace form;
 
+class create_formulaire extends \data\sql{
+
+
+   function __contruct(){
+
+
+   }
 
   function create_table(){
 
@@ -47,5 +54,7 @@ class create_formulaire{
     }
 
 }
+
+
 
 ?>

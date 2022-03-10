@@ -1,6 +1,6 @@
 <?php 
 
-namespace form{
+namespace form;
 
 class gestion_form{
 
@@ -35,6 +35,6 @@ class gestion_form{
 
 }
 
-}
+
 
 ?>

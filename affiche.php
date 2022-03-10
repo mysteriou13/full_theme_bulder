@@ -1,6 +1,6 @@
 <?php 
 
-namespace affiche{
+namespace affiche;
 
 class afficher extends \data\sql{
 
@@ -25,7 +25,7 @@ class afficher extends \data\sql{
 
 
 }
-}    
+   
 
 
 

@@ -1,5 +1,5 @@
 <?php
-namespace data{
+namespace data;
 
 class sql{
 
@@ -16,8 +16,17 @@ class sql{
 
         define( 'prefix', $table_prefix);
 
-       
 
+        $sql = "
+        CREATE TABLE IF NOT EXISTS ".db_menu." ( 
+        `id` INT NOT NULL AUTO_INCREMENT , 
+        `link` TEXT NOT NULL , 
+        `name` TEXT NOT NULL ,
+         PRIMARY KEY (`id`)) ENGINE = InnoDB; 
+        ";
+
+        $this->create_table_menu($sql);        
+   
         }
 
 
@@ -44,23 +53,11 @@ class sql{
         }
 
         
-    function create_table_menu(){
-
+    function create_table_menu($sql){
 
       global $wpdb;
     
       $charset_collate = $wpdb->get_charset_collate();
-    
-       $table_name = db_menu;
-       $dbname =  DB_NAME;
-    
-      $sql = "
-      CREATE TABLE IF NOT EXISTS $dbname ( 
-      `id` INT NOT NULL AUTO_INCREMENT , 
-      `link` TEXT NOT NULL , 
-      `name` TEXT NOT NULL ,
-       PRIMARY KEY (`id`)) ENGINE = InnoDB; 
-      ";
     
       require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
       dbDelta( $sql );
@@ -210,7 +207,7 @@ echo "<a href='.$logout.'>Logout</a>";
 
     }
 
-}
+
 
 
 ?>
