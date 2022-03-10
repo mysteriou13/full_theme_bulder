@@ -16,7 +16,6 @@ class create_formulaire extends \data\sql{
     `type_input` TEXT NOT NULL ,
     `class` TEXT NOT NULL ,
     `obligatoire` TEXT NOT NULL ,
-
      PRIMARY KEY (`id`)) ENGINE = InnoDB; 
     ";
 
@@ -24,10 +23,37 @@ class create_formulaire extends \data\sql{
 
    }
 
-  function create_table(){
+   function add_form(){
 
+    echo "<form action = './?type=newform' method = 'post' >
     
-}
+    <p>  ajout un formulaire</p>
+ 
+    <label>nom du formulaire </label> <input name = 'name_form' type = 'text'>
+    <input type = 'submit' value = 'envoyer'>
+    ";
+    echo "</form>";
+
+
+    global $wpdb;
+
+     if(isset($_POST) && isset($_GET['type']) && ($_GET['type']) == 'newform' ){
+
+    $wpdb->insert(prefix."form", array(
+
+        "name_form" => $_POST['name_form'],
+        
+    ));
+
+    $charset_collate = $wpdb->get_charset_collate();
+    
+    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+    dbDelta( $sql );
+  
+  }
+
+   }
+
 
 
     function new_input(){
@@ -35,12 +61,19 @@ class create_formulaire extends \data\sql{
         $input = ['text','password','radio', 'checkbox', 'file','hidden','reset','button',"textarea",'submit'];
 
          $nbinput = count($input)-1;
+   
+         $hote = $_SERVER['HTTP_HOST']; 
 
-         echo "<form method = 'post' action = './'>
+         echo "
+
+         <p> creer un  formulaire </p>
+      
+         <form action ='' method = 'POST'>
+         
 
          <label> type de de champ </label>
          
-         <SELECT>";
+         <SELECT name = 'type_input' >";
 
          $nb = -1;
 
@@ -54,18 +87,22 @@ class create_formulaire extends \data\sql{
 
 
          echo "</SELECT>
-             <label> nom du champs <input type = 'text'> 
-             <input type = 'radio' name = 'olichamp' value = 'oui'>  
+             <label> nom du champs <input name = 'name_champs' type = 'text'> 
+             <label> champs obligatoire </label> 
+             <input type = 'radio' name = 'olichamp' value = 'oui'>
              <label>oui </label>
              <input type = 'radio' name = 'olichamp' value = 'non'>
              <label> non</label>
              
              <input type = 'submit' value = 'ajouter au  formulaire'>
 
-             </form>
+             
          ";
 
     }
+
+
+
 
 }
 
