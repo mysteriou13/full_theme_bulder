@@ -54,6 +54,34 @@ class create_formulaire extends \data\sql{
 
    }
 
+   function liste_form(){
+
+    global $wpdb;
+      
+    
+    $form = "wp_form";
+   
+    $liste_form = $wpdb->get_results("SELECT * FROM  $form ");
+   
+     $nb_form = count($liste_form)-1; 
+ 
+     echo "<div class ='d-flex justify-content-evenly'>";
+
+     for($nb = 0; $nb <= $nb_form; $nb++){
+
+      $link = "./?menu=".$liste_form[$nb]->id;
+
+    echo "<div>";
+    
+    echo "<a href = '$link' >".$liste_form[$nb]->name_form."</a>";
+
+    echo "</div>";  
+
+    }
+    echo "</div>";
+
+
+   }
 
 
     function new_input(){
