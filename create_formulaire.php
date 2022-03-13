@@ -8,6 +8,11 @@ class create_formulaire extends \data\sql{
    function __construct(){
 
     $form = prefix."form";
+
+     define('form', $form);
+
+
+
     $sql = "
     CREATE TABLE IF NOT EXISTS ".$form." ( 
     `id` INT NOT NULL AUTO_INCREMENT , 
@@ -86,17 +91,24 @@ class create_formulaire extends \data\sql{
 
     function new_input(){
 
+      global $wpdb;
+
+      $form = prefix."form";
+    
+
         $input = ['text','password','radio', 'checkbox', 'file','hidden','reset','button',"textarea",'submit'];
 
          $nbinput = count($input)-1;
    
-         $hote = $_SERVER['HTTP_HOST']; 
+        
+
+         $addinput = "./?typeform=addinput&form=".$_GET['form']; 
 
          echo "
 
-         <p> creer un  formulaire </p>
+         <p> ajouter un champs au formualire </p>
       
-         <form action ='' method = 'POST'>
+         <form action ='$addinput' method = 'POST'>
          
 
          <label> type de de champ </label>
@@ -115,7 +127,7 @@ class create_formulaire extends \data\sql{
 
 
          echo "</SELECT>
-             <label> nom du champs <input name = 'name_champs' type = 'text'> 
+             <label> nom du champs <input name = 'name_input' type = 'text'> 
              <label> champs obligatoire </label> 
              <input type = 'radio' name = 'olichamp' value = 'oui'>
              <label>oui </label>
@@ -126,6 +138,36 @@ class create_formulaire extends \data\sql{
 
              
          ";
+
+
+  
+
+          $prefix = $wpdb->prefix.'form';
+
+          $wp_form = $wpdb->get_results("SELECT  name_form FROM  wp_form WHERE id = ".$_GET['menu']);
+
+
+            $name_menu = $wp_form[0]->name_form;
+         
+
+          if(isset($_POST['name_input'])){
+
+          $wpdb->insert($prefix, array(
+
+            "name_form" => $_GET['form'],
+             
+             "name_input" => $_POST['name_input'],
+
+             "type_input" => $_POST['type_input'],
+             
+             "obligatoire" => $_POST['olichamp']
+
+          ));
+       
+      }
+          
+
+        
 
     }
 
