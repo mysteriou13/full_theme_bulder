@@ -5,7 +5,7 @@ class sql{
 
     function __construct(){
 
-
+    
       $file =  dirname(__FILE__);
 
         $pieces = explode("wp-content", $file);
@@ -204,6 +204,24 @@ echo "<a href='.$logout.'>Logout</a>";
             }
       }
 
+
+        function liste_category(){
+
+          global $wpdb;
+
+          $category = $wpdb->get_results("SELECT * FROM `hiki_terms` ");
+
+           $nb =  count($category)-1;
+
+           for($n = 0; $n <= $nb; $n ++){
+
+            $link = 'index.php/category='.$category[$n]->name;
+
+           echo "<a href =$link >".$category[$n]->name."</a></br>";
+
+           }
+
+        }
 
     }
 
