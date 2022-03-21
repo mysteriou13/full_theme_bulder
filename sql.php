@@ -209,17 +209,70 @@ echo "<a href='.$logout.'>Logout</a>";
 
           global $wpdb;
 
-          $category = $wpdb->get_results("SELECT * FROM `hiki_terms` ");
+           $term = prefix."terms";
+
+          $category = $wpdb->get_results("SELECT * FROM $term ");
 
            $nb =  count($category)-1;
 
            for($n = 0; $n <= $nb; $n ++){
 
-            $link = 'index.php/category='.$category[$n]->name;
+            $link = 'index.php/category='.$category[$n]->term_id;
 
            echo "<a href =$link >".$category[$n]->name."</a></br>";
 
            }
+
+        }
+
+        function post_category($type){
+
+           global $wpdb;
+
+            $term = prefix."term_relationships";
+
+          $category = $wpdb->get_results("SELECT * FROM $term  WHERE term_taxonomy_id = $type ");
+
+          $nb =  count($category)-1;
+
+          $tab = [];
+      
+           for($n = 0; $n <= $nb; $n++){
+
+            array_push($tab, $category[$n]->term_taxonomy_id);
+
+           }
+
+           return $tab;
+
+        }
+
+
+        function affiche_post(){
+
+
+if(isset($_GET['p']) && !empty($_GET['p'])){
+
+  $page = htmlspecialchars($_GET['p']);
+ 
+ }
+ 
+ if(isset($_GET['page_id']) && !empty($_GET['page_id'])){
+ 
+     $page = htmlspecialchars($_GET['page_id']);
+    
+    }
+ 
+
+       global $wpdb;
+
+        $tab = prefix."posts";
+
+        $post = $wpdb->get_results("SELECT * FROM  $tab WHERE ID = $page");
+
+        return $post[0]->post_content;
+
+
 
         }
 
