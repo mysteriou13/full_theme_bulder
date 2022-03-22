@@ -23,8 +23,6 @@ class afficher extends \data\sql{
     }
    
 
-    
-
 
 }
    

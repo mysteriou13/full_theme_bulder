@@ -276,6 +276,18 @@ if(isset($_GET['p']) && !empty($_GET['p'])){
 
         }
 
+        function liste_post(){
+
+          global $wpdb;
+
+        $tab = prefix."posts";
+
+          $post = $wpdb->get_results("SELECT * FROM  $tab  WHERE post_status = 'publish' ");
+
+            return $post;
+
+        }
+
     }
 
 
