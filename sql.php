@@ -239,13 +239,43 @@ echo "<a href='.$logout.'>Logout</a>";
       
            for($n = 0; $n <= $nb; $n++){
 
-            array_push($tab, $category[$n]->term_taxonomy_id);
+            array_push($tab, $category[$n]->object_id);
 
            }
 
            return $tab;
 
         }
+
+
+        function liste_post_by_category($tab){
+
+          global $wpdb;
+
+          $posts = prefix."posts";
+
+         $nbcout = count($tab)-1;
+
+           $nb = 0;
+
+            $t = [];          
+
+  
+           for($nb = 0; $nb <= $nbcout; $nb++){
+      
+             $id =$tab[$nb];
+
+              $category = $wpdb->get_results("SELECT *  FROM  $posts  WHERE id = '$id' ");
+
+              $a = $category[0]->post_title."#".$category[0]->post_excerpt;
+
+              array_push($t,$a);
+            
+           }
+
+              return $t;
+
+               }
 
 
         function affiche_post(){

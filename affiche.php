@@ -32,7 +32,7 @@ class afficher extends \data\sql{
 
     for($c == 0; $c < $count_post; $c++){
 
-       array_push($tab,get_posts()[$c]->post_content);
+       array_push($tab,get_posts()[$c]->post_excerpt);
 
     }
 
@@ -62,8 +62,16 @@ class afficher extends \data\sql{
     
 
     
+function liste_post_category($type){
+
+   global $wpdb;
+
+   $liste = $this->post_category($type);
 
 
+
+
+}
 
         
 
