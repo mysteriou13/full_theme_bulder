@@ -22,41 +22,29 @@ class afficher extends \data\sql{
        
     }
    
-    function affiche_liste_post($el_ligne){
+    function affiche_liste_post(){
 
-   $count_post = count(get_posts());
+   $post =  $this->liste_post();
 
-   $tab = [];
+    $count = count($post)-1;
 
-   $c = 0;
+   $a = 0;
 
-    for($c == 0; $c < $count_post; $c++){
+    for($a = 0; $a <= $count; $a++ ){
 
-       array_push($tab,get_posts()[$c]->post_excerpt);
+    echo "<div> <div> <strong>";
 
-    }
-
-    $l = array_chunk($tab, $el_ligne);
-
-     $n = 0;
-
-     for($n == 0; $n <= count($l)-1; $n++){
-
-      $n1 = 0;
-
-     $c =  count($l[0]);
-
-     echo "<div class = 'd-flex justify-content-between text-light' >";
-     for($n1 == 0; $n1 <= $c; $n1++){
-
-  echo "<div>".$l[$n][$n1]."</div>";
-
-     }
-
-     echo "</div>";
+    echo $post[$a]->post_title."</strong>";
  
-     }
-    
+    echo "</div>";
+
+ $rest = substr($post[$a]->post_content, 0, 550);
+
+ echo $rest."...";
+
+ echo "</div>";
+
+   }
 
 }
     
@@ -68,7 +56,7 @@ function liste_post_category($type){
 
    $liste = $this->post_category($type);
 
-
+   
 
 
 }

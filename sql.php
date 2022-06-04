@@ -312,7 +312,7 @@ if(isset($_GET['p']) && !empty($_GET['p'])){
 
         $tab = prefix."posts";
 
-          $post = $wpdb->get_results("SELECT * FROM  $tab  WHERE post_status = 'publish' ");
+          $post = $wpdb->get_results("SELECT * FROM  $tab   WHERE post_status = 'publish' && post_type= 'post'  ORDER BY  $tab.`ID` ASC   ");
 
             return $post;
 
