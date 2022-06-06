@@ -318,6 +318,19 @@ if(isset($_GET['p']) && !empty($_GET['p'])){
 
         }
 
+        function autor_post($id){
+
+          global $wpdb;
+
+         $tab = prefix."users";
+
+        $autor = $wpdb->get_results("SELECT * FROM  $tab   WHERE ID=$id");
+    
+        print_r($autor[0]->user_login);
+    
+
+        }
+
     }
 
 
