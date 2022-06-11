@@ -15,7 +15,7 @@ class afficher extends \data\sql{
 
          echo "<div>";
 
-         print_r($page[0]);
+      
        
          echo "</div>";
 
@@ -28,8 +28,11 @@ class afficher extends \data\sql{
 
     $count = count($post)-1;
 
-
     $c = 0;
+
+    $el = 4;
+
+    $el_page = 20;
 
     $tab = [];
 
@@ -40,7 +43,7 @@ class afficher extends \data\sql{
     }
 
 
-   $tab_page = array_chunk($tab,20);
+   $tab_page = array_chunk($tab,$el_page);
 
    $t = 0;
 
@@ -49,23 +52,41 @@ class afficher extends \data\sql{
    $c = 0;
 
 
-   $el = 4;
-
-   echo "<div class = 'd-flex'>";
+   echo "<div class = 'd-flex justify-content-around'>";
 
    for($c = 0; $c  <= $cout_page; $c++){
 
-      echo "<div>";
+      $page = $c+1;
 
-      echo $c;
+      $link_page = site_url()."/?nbpage=".$c;
+
+      echo "<div class= ''>";
+
+      echo "<a href = '".$link_page."'>";
+
+      echo "page".$page;
+
+      echo "</a>";
 
       echo "</div>";
 
    }
 
+
    echo '</div>';
 
-  $tab_ligne = array_chunk($tab_page[0],$el);
+   if(!isset($_GET['nbpage'])){
+
+   $nbpage = 0;
+
+   }else{
+
+      $nbpage = htmlspecialchars($_GET['nbpage']);
+
+   }
+
+  $tab_ligne = array_chunk($tab_page[$nbpage],$el);
+
 
   $i = 0;
 
