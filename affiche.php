@@ -21,6 +21,35 @@ class afficher extends \data\sql{
 
        
     }
+
+    function affiche_liste_category(){
+
+      $categories = get_categories( array(
+         'orderby' => 'name',
+         'order'   => 'ASC'
+     ) );
+
+     $count_categorie = count($categories)-1;
+
+     $c = 0;
+
+     for($c == 0; $c <= $count_categorie; $c++){
+
+      $link = "/?cat=".$c;
+
+      echo "<div class = 'text-light'>"; 
+      
+      echo "<a href = '.$link.'>";
+
+      echo $categories[$c]->name; 
+      
+      echo "</div>";
+
+     }
+
+    }
+
+  
    
     function affiche_liste_post(){
 
