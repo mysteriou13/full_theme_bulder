@@ -247,35 +247,106 @@ echo "<a href='.$logout.'>Logout</a>";
 
         }
 
+       
 
-        function liste_post_by_category($tab){
+        function liste_post_by_category($cat,$el_page){
 
           global $wpdb;
 
-          $posts = prefix."posts";
+          $terme = prefix."term_relationships";
 
-         $nbcout = count($tab)-1;
+          $p = prefix."posts";
 
-           $nb = 0;
+          $c = 0;
 
-            $t = [];          
+          $tab = [];
 
-  
-           for($nb = 0; $nb <= $nbcout; $nb++){
-      
-             $id =$tab[$nb];
+            $tab_post = [];
 
-              $category = $wpdb->get_results("SELECT *  FROM  $posts  WHERE id = '$id' ");
+              $category = $wpdb->get_results("SELECT * FROM  $terme WHERE term_taxonomy_id ='$cat'");
 
-              $a = $category[0]->post_title."#".$category[0]->post_excerpt;
-
-              array_push($t,$a);
             
-           }
 
-              return $t;
+               $count = count($category)-1;
+
+               $c1 = 0;
+
+               for($c1 = 0; $c1 <=$count; $c1++){
+
+               array_push($tab_post,$category[$c1]->object_id);
+
 
                }
+           
+
+               $tab_page = array_chunk($tab_post,$el_page);
+
+               $count_tab_page = count($tab_page)-1;
+
+               $tab_count = 0;
+
+               $cat = htmlspecialchars($_GET['cat']);
+
+               echo "<div class = 'd-flex justify-content-around' style = 'width: 57%;'>";
+ 
+               for($tab_count = 0; $tab_count <= $count_tab_page; $tab_count++){
+                
+                $link = site_url()."?cat=".$cat."&page=".$tab_count;
+
+                echo "<div style = 'width:20px'>";
+
+               echo "<a href = '$link'>";
+
+                echo "page".$tab_count;
+
+                echo "</a>";
+
+                echo "</div>";
+
+
+               }
+               echo "</div>";
+
+
+               if(isset($_GET['page']) && !empty($_GET['page'])){
+              
+                $page = htmlspecialchars($_GET['page']);
+
+              $el_page = count($tab_page[$page])-1;
+
+
+               }else{
+
+                $el_page = count($tab_page[0])-1;
+
+
+                $page = 0;
+
+               }
+           
+              $tab_ligne = [];
+              
+
+              for($c = 0; $c<= $el_page; $c++){
+
+                 $post = $wpdb->get_results("SELECT * FROM  $p WHERE ID =".$tab_page[$page][$c]);
+
+                 
+                  $el = $post[0]->post_title."/".$post[0]->post_excerpt;
+                 
+
+                array_push($tab_ligne,$el);
+
+                }
+
+                echo "<pre>";
+
+                print_r($tab_ligne);
+
+                echo "</pre>";
+
+              }
+              
 
 
         function affiche_post(){

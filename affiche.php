@@ -184,23 +184,6 @@ echo "<img  style = 'width:100%; height:100%;' src= ".$url.">";
    $a = 0;
 
    
-   /*
-    for($a == 0; $a <= $count; $a++ ){
-
-    echo "<div> <div> <strong>";
-
-    echo $post[$a]->ID."</strong>";
- 
-    echo "</div>";
-
- $rest = substr($post[$a]->post_content, 0, 550);
-
-
- echo "</div>";
-
-   }
-  
-   */
 
 }
   
@@ -212,8 +195,14 @@ function liste_post_category($type){
 
    $liste = $this->post_category($type);
 
-   
+}
 
+function category_post($cat){
+
+$cat =  htmlspecialchars($cat);
+
+
+   $this->liste_post_by_category($cat,3);
 
 }
 
