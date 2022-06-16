@@ -263,87 +263,96 @@ echo "<a href='.$logout.'>Logout</a>";
 
             $tab_post = [];
 
-              $category = $wpdb->get_results("SELECT * FROM  $terme WHERE term_taxonomy_id ='$cat'");
+              $category = $wpdb->get_results("SELECT object_id FROM  $terme WHERE term_taxonomy_id ='$cat'");
 
+              $page = array_chunk($category,5);
+
+
+
+              
+              $c = 0;
+
+              echo "<div class = 'd-flex justify-content-around'>";
+
+              for($c = 0; $c<=count($page)-1; $c++){
+
+                $link = site_url()."?cat=".htmlspecialchars($_GET['cat'])."&page=".$c;
+
+                echo "<div>";
+
+                 echo "<a href = '$link'>"."page".$c."</a>";
+
+                 echo "</div>";
+              }
+
+              echo "</div>";
+
+              if(isset($_GET['page']) && !empty($_GET['page'])){
+
+              $nbpage = htmlspecialchars($_GET['page']);
+
+              }else{
+
+                $nbpage = 0;
+
+              }
+
+              $el_page = count($page[$nbpage]);
+
+             $count_el_page = array_chunk($page[$nbpage],2);
+
+             $nb_page = count($count_el_page)-1;
+             
+
+             $a = 0;
             
+             for($a = 0; $a <= $nb_page; $a++){
 
-               $count = count($category)-1;
+              echo "<div  class ='d-flex justify-content-between' style = 'width:80%' >";
+            
+              foreach ($count_el_page[$a] as &$value) {
 
-               $c1 = 0;
-
-               for($c1 = 0; $c1 <=$count; $c1++){
-
-               array_push($tab_post,$category[$c1]->object_id);
-
-
-               }
-           
-
-               $tab_page = array_chunk($tab_post,$el_page);
-
-               $count_tab_page = count($tab_page)-1;
-
-               $tab_count = 0;
-
-               $cat = htmlspecialchars($_GET['cat']);
-
-               echo "<div class = 'd-flex justify-content-around' style = 'width: 57%;'>";
- 
-               for($tab_count = 0; $tab_count <= $count_tab_page; $tab_count++){
+                echo "<div>";
                 
-                $link = site_url()."?cat=".$cat."&page=".$tab_count;
+             echo "<div style = 'width:50vh; height:50vh'>";
 
-                echo "<div style = 'width:20px'>";
-
-               echo "<a href = '$link'>";
-
-                echo "page".$tab_count;
-
-                echo "</a>";
-
-                echo "</div>";
+             echo "<a href = '".get_permalink($value->object_id)."'>";
+        
+             $url = wp_get_attachment_url( get_post_thumbnail_id($value->object_id), 'thumbnail' );
+        
+        echo "<img  style = 'object-fit:cover; width:100%; height:100%;' src= ".$url.">"; 
+      
+               echo "</div>"; 
 
 
-               }
+               echo "<div>";
+
+               echo get_the_title($value->object_id);
+
                echo "</div>";
 
-
-               if(isset($_GET['page']) && !empty($_GET['page'])){
               
-                $page = htmlspecialchars($_GET['page']);
+               echo "<div style = 'width:50vh; '>";
 
-              $el_page = count($tab_page[$page])-1;
+              echo  get_the_excerpt($value->object_id)."...";
 
+               echo "</div>";
 
-               }else{
+               echo "</a>";
 
-                $el_page = count($tab_page[0])-1;
+          echo "</div>";
+          
+            
+             $c1 = 0;
 
+            
+            }
 
-                $page = 0;
+            echo "</div>";
 
-               }
-           
-              $tab_ligne = [];
+          }
               
 
-              for($c = 0; $c<= $el_page; $c++){
-
-                 $post = $wpdb->get_results("SELECT * FROM  $p WHERE ID =".$tab_page[$page][$c]);
-
-                 
-                  $el = $post[0]->post_title."/".$post[0]->post_excerpt;
-                 
-
-                array_push($tab_ligne,$el);
-
-                }
-
-                echo "<pre>";
-
-                print_r($tab_ligne);
-
-                echo "</pre>";
 
               }
               
@@ -377,17 +386,17 @@ if(isset($_GET['p']) && !empty($_GET['p'])){
 
         }
 
-        function liste_post(){
+          function liste_post(){
 
-          global $wpdb;
+            global $wpdb;
 
-        $tab = prefix."posts";
+          $tab = prefix."posts";
 
-          $post = $wpdb->get_results("SELECT * FROM  $tab   WHERE post_status = 'publish' && post_type= 'post'  ORDER BY  $tab.`ID` ASC   ");
+            $post = $wpdb->get_results("SELECT * FROM  $tab   WHERE post_status = 'publish' && post_type= 'post'  ORDER BY  $tab.`ID` ASC   ");
 
-            return $post;
+              return $post;
 
-        }
+          }
 
         function autor_post($id){
 
