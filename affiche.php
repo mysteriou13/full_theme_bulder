@@ -128,7 +128,7 @@ class afficher extends \data\sql{
    
    foreach($tab_ligne[$keys[$i]] as $key => $value) { 
 
-       $link  =  site_url()."/?post=".$post[$value]->ID;
+       $link  =  get_permalink($post[$value]->ID);
 
       echo "<a href  = '$link' style = 'text-decoration: none'> ";
       
@@ -138,7 +138,7 @@ class afficher extends \data\sql{
         
      $url = wp_get_attachment_url( get_post_thumbnail_id($post[$value]), 'thumbnail' );
 
-echo "<img  style = 'width:100%; height:100%;' src= ".$url.">"; 
+echo "<img  style = 'width:100%; height:100%; object-fit:cover;' src= ".$url.">"; 
 
        echo "</div>"; 
 
