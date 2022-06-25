@@ -5,24 +5,41 @@ class menu_header extends \data\sql{
 
     function __construct(){
 
-        $header = prefix."table";
+      global $wpdb;
+
+         $header = prefix."header";
 
         $sql = "
-        CREATE TABLE IF NOT EXISTS ".$header." ( 
-        `id` INT NOT NULL AUTO_INCREMENT , 
-        `link` TEXT NOT NULL , 
-        `name` TEXT NOT NULL ,
-        `admin` TEXT NOT NULL ,
-        `membre` TEXT NOT NULL ,
+      
+        CREATE TABLE `$header` (
+          `id` int(11) NOT NULL,
+          `name` text NOT NULL,
+          `link` text NOT NULL,
+          `admin` int(11) NOT NULL,
+          `membre` int(11) NOT NULL,
+          `ligne` int(11) NOT NULL,
 
-         PRIMARY KEY (`id`)) ENGINE = InnoDB; 
-        ";
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         
+      
+        ";
 
-        global $wpdb;
-      $sql	= $wpdb->prepare($sql);
-        $r	= $wpdb->get_results($sql);
+       $sql1 = "ALTER TABLE `$header`
+       ADD PRIMARY KEY (`id`);";
+  
+  $sql2 = "ALTER TABLE `$header`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;";
 
+        $charset_collate = $wpdb->get_charset_collate();
+    
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $sql );
+
+
+        $wpdb->get_results($sql1);
+        $wpdb->get_results($sql2);
+        
 
     }
 
