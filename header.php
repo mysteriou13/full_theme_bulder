@@ -7,39 +7,46 @@ class menu_header extends \data\sql{
 
       global $wpdb;
 
-         $header = prefix."header";
-
-        $sql = "
-      
-        CREATE TABLE `$header` (
-          `id` int(11) NOT NULL,
-          `name` text NOT NULL,
-          `link` text NOT NULL,
-          `admin` int(11) NOT NULL,
-          `membre` int(11) NOT NULL,
-          `ligne` int(11) NOT NULL,
-
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-        
-      
-        ";
-
-       $sql1 = "ALTER TABLE `$header`
-       ADD PRIMARY KEY (`id`);";
+      $header = $wpdb->prefix."menu_header";
   
-  $sql2 = "ALTER TABLE `$header`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;";
+      $menu_ligne = $wpdb->prefix."menu_ligne";
+      $sql = "
+      
+      CREATE TABLE  IF NOT EXISTS $header (
+        id int NOT NULL AUTO_INCREMENT,
+        `name` text NOT NULL,
+  `link` text NOT NULL,
+  `admin` text NOT NULL,
+  `membre` text NOT NULL,
 
-        $charset_collate = $wpdb->get_charset_collate();
+        PRIMARY KEY (id)
+    ); 
+
+      ";
     
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        dbDelta( $sql );
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
 
 
-        $wpdb->get_results($sql1);
-        $wpdb->get_results($sql2);
-        
+
+
+        $sql1 = "
+      
+      CREATE TABLE  IF NOT EXISTS $menu_ligne (
+        id int NOT NULL AUTO_INCREMENT,
+        `el_ligne` text NOT NULL,
+  `ligne` text NOT NULL,
+  
+        PRIMARY KEY (id)
+    ); 
+
+      ";
+    
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql1);
+
+  
+  
 
     }
 
