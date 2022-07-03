@@ -1,11 +1,18 @@
 <?php 
-namespace menu_header;
+namespace menu_header{
 
 class menu_header extends \data\sql{
 
     function __construct(){
-
       global $wpdb;
+
+      if ( current_user_can( 'manage_options' ) ) {
+ 
+        echo "admin";
+
+    }
+    
+    
 
       $header = $wpdb->prefix."menu_header";
   
@@ -50,6 +57,13 @@ class menu_header extends \data\sql{
 
     }
 
+    function add_el(){
+
+      global $wpdb;
+
+  
+    }
+  }
 
 }
 ?>

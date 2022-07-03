@@ -31,7 +31,7 @@ class afficher extends \data\sql{
 
      $count_categorie = count($categories)-1;
 
-     $c = 0;
+       $c = 0;
 
      for($c == 0; $c <= $count_categorie; $c++){
 
@@ -206,7 +206,31 @@ $cat =  htmlspecialchars($cat);
 
 }
 
-        
+
+function menu_liste_post(){
+
+$post =  $this->liste_post();
+
+$count = count($post)-1;
+
+$c = 0;
+
+echo "<select>";
+
+for($c == 0; $c <=  $count; $c++ ){
+
+   echo "<option value = ".$post[$c]->id.">";
+
+print_r($post[$c]->post_title."/".$post[$c]->ID);
+
+   echo "</option>";
+}
+
+echo "</select>";
+
+echo "<input type = 'submit' value = 'envoyer'>";
+
+}     
 
 }
    
