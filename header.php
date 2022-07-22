@@ -6,12 +6,7 @@ class menu_header extends \data\sql{
     function __construct(){
       global $wpdb;
 
-      if ( current_user_can( 'manage_options' ) ) {
  
-        echo "admin";
-
-    }
-    
     
 
       $header = $wpdb->prefix."menu_header";
@@ -57,11 +52,18 @@ class menu_header extends \data\sql{
 
     }
 
-    function add_el(){
+    function add_el_header($name,$link,$admin,$membre){
 
       global $wpdb;
 
-  
+     $wpdb->insert($wpdb->prefix."menu_header", array(
+        'name' => $name,
+        'link' => $link,
+        'admin' => $admin, 
+        'membre'=> $membre,
+    ));
+
+
     }
   }
 

@@ -215,20 +215,20 @@ $count = count($post)-1;
 
 $c = 0;
 
-echo "<select>";
+echo "<select name = 'select_link'>";
 
 for($c == 0; $c <=  $count; $c++ ){
+ 
+   echo "<option value = ";echo $post[$c]->ID; echo ">";
 
-   echo "<option value = ".$post[$c]->id.">";
-
-print_r($post[$c]->post_title."/".$post[$c]->ID);
+echo ($post[$c]->post_title);
 
    echo "</option>";
 }
 
 echo "</select>";
 
-echo "<input type = 'submit' value = 'envoyer'>";
+
 
 }     
 
