@@ -232,6 +232,18 @@ echo "</select>";
 
 }     
 
+function afficher_el_header(){
+
+global $wpdb;
+
+$header = $wpdb->prefix."menu_header"; 
+
+
+   $results = $wpdb->get_results( "SELECT * FROM $header" );
+
+
+}
+
 }
    
 
