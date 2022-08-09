@@ -1,0 +1,12 @@
+{
+    "name": "root/full_theme_bulder",
+    "authors": [
+        {
+            "name": "mysteriou",
+            "email": "elio07@hotmail.fr"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.6"
+    }
+}
