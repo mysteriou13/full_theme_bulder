@@ -1,5 +1,5 @@
 <?php 
-namespace mail;
+namespace mails;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -29,14 +29,17 @@ class mail extends PHPMailer{
 
 }
 
- function sendmail($email,$suject,$name_send){
+ function sendmail($email,$suject,$name_send,$message){
+
+  $message = file_get_contents($message);
 
   $this->setFrom(mail, 'Mailer');
      $this->addAddress($email, $name_send); 
     $this->isHTML(true);                                  //Set email format to HTML
     $this->Subject =  $suject;
-    $this->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $this->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $this->MsgHTML($message);
+    $this->IsHTML(true); 
+    $this->Body    = $message;
 
    $this->send();
 
