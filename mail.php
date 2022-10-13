@@ -18,7 +18,14 @@ class mail extends PHPMailer{
 
                 parent::__construct($exceptions);
     
-    $this->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+
+      if($_SERVER['HTTP_HOST'] == "localhost"){
+   
+   $this->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+   
+            }
+
+
     $this->isSMTP();                                            //Send using SMTP
     $this->Host       = host;                     //Set the SMTP server to send through
     $this->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -31,7 +38,7 @@ class mail extends PHPMailer{
 
  function sendmail($email,$suject,$name_send,$message){
 
-  $message = file_get_contents($message);
+  $message = $message;
 
   $this->setFrom(mail, 'Mailer');
      $this->addAddress($email, $name_send); 
