@@ -1,6 +1,10 @@
 
 <form id = "form_inscription"   action = "<?php $_SERVER['PHP_SELF']?>" method = "POST" >
-	<div  id = "form_inscription">
+
+	<div  id = "form_inscription" class  = "form_inscription">
+		<h1 class = "text-light">
+			Inscription
+             </h1>
 		<div class = "d-flex justify-content-between margin_bottom_submit">
 			<div>
 				<label for = "pseudo"> pseudo </label>
