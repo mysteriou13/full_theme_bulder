@@ -1,6 +1,4 @@
 
-
-
 var ins = $("#form_inscription");
 
 var validepass = 0;

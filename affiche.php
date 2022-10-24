@@ -89,7 +89,7 @@ class afficher extends \data\sql{
 
       $link_page = site_url()."/?nbpage=".$c;
 
-      echo "<div class= ''>";
+      echo "<div>";
 
       echo "<a href = '".$link_page."'>";
 
@@ -123,30 +123,36 @@ class afficher extends \data\sql{
 
 
   for($i = 0; $i < count($tab_ligne); $i++) { 
-   echo "<div class = 'd-flex'  style = 'width:100vh; '>";
+   echo "<div class = 'd-flex ligne_card_box'>";
    
    
    foreach($tab_ligne[$keys[$i]] as $key => $value) { 
 
        $link  =  get_permalink($post[$value]->ID);
 
-      echo "<a href  = '$link' style = 'text-decoration: none'> ";
+      echo "<a href  = '$link'> ";
       
-      echo "<div>";
+      echo "<div class = 'card_post'>";
 
-      echo "<div style = 'width:30vh; height:30vh'>";
+      echo "<div style = 'width:23vh; height:23vh'>";
         
      $url = wp_get_attachment_url( get_post_thumbnail_id($post[$value]), 'thumbnail' );
 
-echo "<img  style = 'width:100%; height:100%; object-fit:cover;' src= ".$url.">"; 
+echo "<img  style = 'width:100%; height:100%; object-fit:cover;' class = 'bordure_card' src= ".$url.">"; 
 
        echo "</div>"; 
 
-       echo "<div>";
+       echo "<div class = 'text_card_index'>";
 
        echo $post[$value]->post_excerpt."...";
 
-       echo "</div>";
+
+        ?>
+
+
+        <?php
+
+    
 
 
 
@@ -167,6 +173,35 @@ echo "<img  style = 'width:100%; height:100%; object-fit:cover;' src= ".$url.">"
 
        echo "</div>";
 
+       
+
+       ?>
+
+<div class="bloc-partage">
+<div class = "text-light">
+   Partager
+   </div>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<a href="http://twitter.com/share" target="blank" data-url="<?php the_permalink() ?>" data-via="<?php bloginfo('name'); ?>" data-text="<?php the_title(); ?>" data-count="horizontal">
+ <img alt="Partager sur Twitter" src="<?php bloginfo('template_url'); ?>/image/partager-twitter.png" />
+</a>
+<a href="http://www.facebook.com/sharer.php?u=<?php the_permalink();?>&t=<?php the_title(); ?>" target="blank">
+ <img alt="Partager sur Facebook" src="<?php bloginfo('template_url'); ?>/image/partager-facebook.png" />
+</a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink(); ?>&title=<?php the_title(); ?>" target="_blank">
+ <img alt="Partager sur Linkedin" src="<?php bloginfo('template_url'); ?>/image/partager-linkedin.png" />
+</a>
+<a href="https://www.scoop.it/bookmarklet?url=<?php the_permalink();?>" target="_blank">
+ <img alt="Partager sur Scoopit!" src="<?php bloginfo('template_url'); ?>/image/partager-scoopit.png" />
+</a>
+<a href="https://plus.google.com/share?url=<?php the_permalink();?>" target="_blank">
+ <img alt="Partager sur Google+" src="<?php bloginfo('template_url'); ?>/image/partager-googleplus.png" />
+</a>
+<div class="clear"></div>
+</div>
+     <?php
+
+       echo "</div>";
 
        echo "</div>";
 

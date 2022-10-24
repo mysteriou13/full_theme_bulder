@@ -1,0 +1,14 @@
+.card_post{
+    @extend .bordure_card;
+    margin-right: 3vh;
+
+    background-color: rgba(43,60,89,.37);
+
+    width: 23vh;
+    
+
+    padding-bottom: 9%;
+
+    border-bottom-right-radius: 111px 111px;
+    border-bottom-left-radius: 111px 111px;
+}

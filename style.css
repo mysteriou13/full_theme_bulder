@@ -1,0 +1,24 @@
+.card_post {
+  margin-right: 3vh;
+  background-color: rgba(43, 60, 89, 0.37);
+  width: 23vh;
+  padding-bottom: 9%;
+  border-bottom-right-radius: 111px 111px;
+  border-bottom-left-radius: 111px 111px; }
+
+.bordure_card, .card_post {
+  border-top-right-radius: 111px 111px;
+  border-top-left-radius: 111px 111px; }
+
+.text_card_index {
+  position: relative;
+  left: 9%;
+  top: 3%;
+  width: 88%;
+  margin-bottom: 11%; }
+
+.ligne_card_box {
+  margin-bottom: 11%;
+  width: 100vh; }
+
+/*# sourceMappingURL=style.css.map */
