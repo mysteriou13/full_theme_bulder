@@ -199,6 +199,8 @@ echo "<img   class = 'bordure_card img ' src= ".$url.">";
 </a>
 <div class="clear"></div>
 </div>
+
+
      <?php
 
        echo "</div>";
@@ -237,7 +239,7 @@ function category_post($cat){
 $cat =  htmlspecialchars($cat);
 
 
-   $this->liste_post_by_category($cat,3);
+   $this->liste_post_by_category($cat,2);
 
 }
 

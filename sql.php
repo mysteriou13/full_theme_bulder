@@ -299,7 +299,7 @@ echo "<a href='.$logout.'>Logout</a>";
 
               $el_page = count($page[$nbpage]);
 
-             $count_el_page = array_chunk($page[$nbpage],2);
+             $count_el_page = array_chunk($page[$nbpage],4);
 
              $nb_page = count($count_el_page)-1;
              
@@ -308,33 +308,64 @@ echo "<a href='.$logout.'>Logout</a>";
             
              for($a = 0; $a <= $nb_page; $a++){
 
-              echo "<div  class ='d-flex justify-content-between' style = 'width:80%' >";
+              echo "<div  class ='d-flex justify-content-between ligne_card_box' >";
             
               foreach ($count_el_page[$a] as &$value) {
 
-                echo "<div>";
+                echo "<div class = 'card_post'>";
                 
-             echo "<div style = 'width:50vh; height:50vh'>";
+             echo "<div class = 'card_image_post' >";
 
-             echo "<a href = '".get_permalink($value->object_id)."'>";
+             echo "<a href class = '".get_permalink($value->object_id)."'>";
         
              $url = wp_get_attachment_url( get_post_thumbnail_id($value->object_id), 'thumbnail' );
         
-        echo "<img  style = 'object-fit:cover; width:100%; height:100%;' src= ".$url.">"; 
+        echo "<img  class = 'bordure_card img'  src= ".$url.">"; 
       
                echo "</div>"; 
 
 
-               echo "<div>";
+               echo "<div class = 'text_card_index'>";
 
                echo get_the_title($value->object_id);
 
                echo "</div>";
 
               
-               echo "<div style = 'width:50vh; '>";
+               echo "<div class ='text_card_index'>";
 
               echo  get_the_excerpt($value->object_id)."...";
+
+
+              ?>
+
+<div>
+<div>
+  partager
+              </div>
+<div>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<a href="http://twitter.com/share" target="blank" data-url="<?php the_permalink() ?>" data-via="<?php bloginfo('name'); ?>" data-text="<?php the_title(); ?>" data-count="horizontal">
+ <img alt="Partager sur Twitter" src="<?php bloginfo('template_url'); ?>/image/partager-twitter.png" />
+</a>
+<a href="http://www.facebook.com/sharer.php?u=<?php the_permalink();?>&t=<?php the_title(); ?>" target="blank">
+ <img alt="Partager sur Facebook" src="<?php bloginfo('template_url'); ?>/image/partager-facebook.png" />
+</a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink(); ?>&title=<?php the_title(); ?>" target="_blank">
+ <img alt="Partager sur Linkedin" src="<?php bloginfo('template_url'); ?>/image/partager-linkedin.png" />
+</a>
+<a href="https://www.scoop.it/bookmarklet?url=<?php the_permalink();?>" target="_blank">
+ <img alt="Partager sur Scoopit!" src="<?php bloginfo('template_url'); ?>/image/partager-scoopit.png" />
+</a>
+<a href="https://plus.google.com/share?url=<?php the_permalink();?>" target="_blank">
+ <img alt="Partager sur Google+" src="<?php bloginfo('template_url'); ?>/image/partager-googleplus.png" />
+</a>
+              </div>
+
+              </div>
+
+
+              <?php
 
                echo "</div>";
 
