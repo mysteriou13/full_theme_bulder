@@ -134,7 +134,7 @@ class afficher extends \data\sql{
       
       echo "<div class = 'card_post'>";
 
-      echo "<div style = 'width:23vh; height:23vh'>";
+      echo "<div class = 'card_image_post'>";
         
      $url = wp_get_attachment_url( get_post_thumbnail_id($post[$value]), 'thumbnail' );
 
