@@ -138,7 +138,7 @@ class afficher extends \data\sql{
         
      $url = wp_get_attachment_url( get_post_thumbnail_id($post[$value]), 'thumbnail' );
 
-echo "<img  style = 'width:100%; height:100%; object-fit:cover;' class = 'bordure_card' src= ".$url.">"; 
+echo "<img   class = 'bordure_card img ' src= ".$url.">"; 
 
        echo "</div>"; 
 
