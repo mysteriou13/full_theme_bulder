@@ -8,7 +8,7 @@
 
  require_once "mail.php";
 
- if(file_exists($full_theme_hiki."./config.php")){
+ if(file_exists("./config.php")){
    
     $mail = new \mails\mail(true);
 
