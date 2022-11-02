@@ -11,7 +11,7 @@ class aside extends \data\sql{
       
         include($pieces[0]."/wp-config.php");
         
-        define( 'db_aside', $table_prefix."aside");
+        define( 'aside', $table_prefix."aside");
 
 
         $aside = "
@@ -19,14 +19,26 @@ class aside extends \data\sql{
         `id` INT NOT NULL AUTO_INCREMENT , 
         `name_link` TEXT NOT NULL , 
         `link_page` TEXT NOT NULL ,
+        `section` TEXT NOT NULL ,
          PRIMARY KEY (`id`)) ENGINE = InnoDB; 
         ";
 
         $this->create_table_menu($aside);        
    
 
-
     }
+
+      function liste_aside($section){
+
+        global $wpdb;
+      
+        $header = $wpdb->prefix."aside"; 
+
+        $mylink = $wpdb->get_results("SELECT * FROM ".$header);
+        
+        print_r($mylink);
+
+      }
 
 }
 

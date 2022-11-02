@@ -8,21 +8,23 @@
 
  require_once "mail.php";
 
+ require_once "aside.php";
+
  if(file_exists("./config.php")){
    
     $mail = new \mails\mail(true);
 
    }
 
-
-   $sql = new \data\sql();
-
-
  $sql = new \data\sql();
    
  $affiche = new \affiche\afficher();
 
  $menu_header = new \menu_header\menu_header();
+
+ $aside = new  \aside\aside();
+
+
 
 
 ?>
