@@ -19,7 +19,7 @@ class aside extends \data\sql{
         `id` INT NOT NULL AUTO_INCREMENT , 
         `name_link` TEXT NOT NULL , 
         `link_page` TEXT NOT NULL ,
-        `section` TEXT NOT NULL ,
+          `link_page` TEXT NOT NULL ,
          PRIMARY KEY (`id`)) ENGINE = InnoDB; 
         ";
 
@@ -34,9 +34,23 @@ class aside extends \data\sql{
       
         $header = $wpdb->prefix."aside"; 
 
-        $mylink = $wpdb->get_results("SELECT * FROM ".$header);
+        $mylink = $wpdb->get_results("SELECT * FROM ".$header." WHERE section = '".$section."'");
         
-        print_r($mylink);
+        $a = 0;
+
+        $count = count($mylink)-1;
+
+
+        for($a = 0;  $a <= $count; $a++){
+
+         
+           ?>
+           <a href = "<?php  echo $mylink[$a]->link_page; ?>"> <?php echo $mylink[$a]->name_link?> </a>
+           <?php
+
+        }
+
+      
 
       }
 
