@@ -28,7 +28,8 @@ class aside extends \data\sql{
 
     }
 
-      function liste_aside($section){
+      function liste_aside($section , $class = null)
+      {
 
         global $wpdb;
       
@@ -45,7 +46,7 @@ class aside extends \data\sql{
 
          
            ?>
-           <a href = "<?php  echo $mylink[$a]->link_page; ?>"> <?php echo $mylink[$a]->name_link?> </a>
+           <a class = "<?php echo $class ?>" href = "<?php  echo $mylink[$a]->link_page; ?>"> <?php echo $mylink[$a]->name_link?> </a>
            <?php
 
         }
