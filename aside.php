@@ -55,6 +55,127 @@ class aside extends \data\sql{
 
       }
 
+      function insert_aside(){
+        
+        global $wpdb;
+      
+       $header = $wpdb->prefix."posts"; 
+
+        $mylink = $wpdb->get_results("SELECT * FROM ".$header." WHERE post_status = 'publish' && post_type = 'post' ");
+
+        $aside = $wpdb->prefix."aside"; 
+
+        $aside1 = $wpdb->get_results("SELECT * FROM ".$aside);
+        
+
+        ?>
+
+      <form method = "POST" action = "./?aside=insert">
+      <div>
+
+  
+      <div>
+  
+
+      <div>
+      ajout un lien  
+    </div>
+      
+    <div class = "d-flex">
+
+      <div>
+      <label> nom du lien</label> 
+      </div>
+
+      <div>
+      <input type = "text" name = "name_link">
+      
+      </div>
+      
+    </div>
+
+      <div>
+     
+      <div>
+      <label> lien vers la page </label>
+      </div>
+      <div>
+
+      <select name="link_post" id="pet-select">
+   
+      <?php
+      for($a = 0; $a <= count($mylink)-1; $a++){ 
+      ?>
+      <option value="<?php echo $mylink[$a]->ID?>"><?php echo $mylink[$a]->post_title;?></option>
+   
+      <?php 
+      }
+      ?>
+</select>
+
+      </div>
+
+      <div>
+        <div>
+        ajouter  à la section
+    </div>
+    <div>
+
+    <select name = "link_cat">
+      <?php
+      
+      for($a1 = 0;  $a1 <= count($aside1)-1; $a1++ ){
+
+        ?>
+
+<option value="<?php echo $aside1[$a1]->section?>"><?php echo $aside1[$a1]->section;?></option>
+
+        <?php
+
+      
+      }
+      
+      ?>
+    </select>
+
+    </div>
+
+    </div>
+
+      <div>
+    </div>
+
+      </div>
+
+      </div>
+
+      <div>
+      <input type = "submit">
+
+      </div>
+      </div>
+
+      </form>
+
+        <?php
+        
+        if(isset($_GET['aside']) && !empty($_GET['aside'])){
+
+                
+          $wpdb->insert($aside, array(
+            'name_link' => $_POST['name_link'],
+            'link_page' => $_POST['link_post'],
+            'section' => $_POST['link_cat'], // ... and so on
+        ));
+
+      
+
+        
+
+        }
+
+      }
+
 }
 
 ?>
