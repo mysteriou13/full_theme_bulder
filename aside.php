@@ -46,7 +46,9 @@ class aside extends \data\sql{
 
          
            ?>
+           <div>
            <a class = "<?php echo $class ?>" href = "<?php  echo $mylink[$a]->link_page; ?>"> <?php echo $mylink[$a]->name_link?> </a>
+           </div>
            <?php
 
         }
