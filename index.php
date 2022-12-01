@@ -10,6 +10,8 @@
 
  require_once "aside.php";
 
+ require_once "paypal.php";
+
  if(file_exists("./config.php")){
    
     $mail = new \mails\mail(true);
@@ -24,7 +26,7 @@
 
  $aside = new  \aside\aside();
 
-
+ $paypal = new  \paypal\paypal();
 
 
 ?>
