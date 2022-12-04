@@ -35,7 +35,7 @@ class aside extends \data\sql{
       
         $header = $wpdb->prefix."aside"; 
 
-        $mylink = $wpdb->get_results("SELECT * FROM ".$header." WHERE section = '".$section."'");
+        $mylink = $wpdb->get_results("SELECT * FROM ".$header);
         
         $a = 0;
 
@@ -47,7 +47,7 @@ class aside extends \data\sql{
          
            ?>
            <div>
-           <a class = "<?php echo $class ?>" href = "<?php  echo $mylink[$a]->link_page; ?>"> <?php echo $mylink[$a]->name_link?> </a>
+           <a class = "<?php echo $class ?>" href = "<?php  echo site_url()."?p=".$mylink[$a]->link_page; ?>"> <?php echo $mylink[$a]->name_link?> </a>
            </div>
            <?php
 
@@ -167,7 +167,7 @@ class aside extends \data\sql{
           $wpdb->insert($aside, array(
             'name_link' => $_POST['name_link'],
             'link_page' => $_POST['link_post'],
-            'section' => $_POST['link_cat'], // ... and so on
+            'section' => 'test', // ... and so on
         ));
 
       
