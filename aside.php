@@ -13,34 +13,81 @@ class aside extends \data\sql{
         
         define( 'aside', $table_prefix."aside");
 
+        define( 'section', $table_prefix."section");
 
         $aside = "
         CREATE TABLE IF NOT EXISTS ".aside." ( 
         `id` INT NOT NULL AUTO_INCREMENT , 
         `name_link` TEXT NOT NULL , 
         `link_page` TEXT NOT NULL ,
-          `link_page` TEXT NOT NULL ,
+         PRIMARY KEY (`id`)) ENGINE = InnoDB; 
+        ";
+
+        $table_section = "
+        CREATE TABLE IF NOT EXISTS ".section." ( 
+        `id` INT NOT NULL AUTO_INCREMENT , 
+        `name_section` TEXT NOT NULL , 
          PRIMARY KEY (`id`)) ENGINE = InnoDB; 
         ";
 
         $this->create_table_menu($aside);        
    
+        $this->create_table_menu($table_section);  
 
     }
 
-      function liste_aside($section , $class = null)
+    function affiche_aside(){
+
+      $tab_section = $this->liste_section();
+      
+    $a = 0;
+
+    for($a == 0; $a <= count($tab_section); $a++){
+
+        echo $tab_section[$a];
+
+     $this->liste_aside($tab_section[$a],'link_aside');
+     
+    }
+
+    }
+
+    function liste_section(){
+
+      global $wpdb;
+      
+      $header = $wpdb->prefix."section"; 
+
+      
+       $section = $wpdb->get_results("SELECT name_section FROM ".$header);
+
+       $table_section = array();
+
+       $a = 0;
+
+       for($a == 0; $a !== count($section); $a++){
+        
+        array_push($table_section,$section[$a]->name_section);
+
+       }
+       
+       return $table_section;       
+
+    }
+
+      function liste_aside($section,$class = null)
       {
 
         global $wpdb;
       
-        $header = $wpdb->prefix."aside"; 
+       $header = $wpdb->prefix."aside"; 
 
-        $mylink = $wpdb->get_results("SELECT * FROM ".$header);
-        
+       
+        $mylink = $wpdb->get_results("SELECT * FROM ".$header." WHERE `section`='$section'");
+
         $a = 0;
 
         $count = count($mylink)-1;
-
 
         for($a = 0;  $a <= $count; $a++){
 
@@ -68,8 +115,11 @@ class aside extends \data\sql{
         $aside = $wpdb->prefix."aside"; 
 
         $aside1 = $wpdb->get_results("SELECT * FROM ".$aside);
-        
 
+        $section = $wpdb->prefix."section"; 
+
+        $mysection = $wpdb->get_results("SELECT * FROM ".$section);
+        
         ?>
 
       <form method = "POST" action = "./?aside=insert">
@@ -126,11 +176,11 @@ class aside extends \data\sql{
     <select name = "link_cat">
       <?php
       
-      for($a1 = 0;  $a1 <= count($aside1)-1; $a1++ ){
+      for($a1 = 0;  $a1 <= count($mysection)-1; $a1++ ){
 
         ?>
 
-<option value="<?php echo $aside1[$a1]->section?>"><?php echo $aside1[$a1]->section;?></option>
+<option value="<?php echo $mysection[$a1]->name_section?>"><?php echo $mysection[$a1]->name_section;?></option>
 
         <?php
 
