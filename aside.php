@@ -20,6 +20,7 @@ class aside extends \data\sql{
         `id` INT NOT NULL AUTO_INCREMENT , 
         `name_link` TEXT NOT NULL , 
         `link_page` TEXT NOT NULL ,
+        `type_link` TEXT NOT NULL ,
          PRIMARY KEY (`id`)) ENGINE = InnoDB; 
         ";
 
@@ -153,7 +154,17 @@ class aside extends \data\sql{
       </div>
       <div>
 
-      <select name="link_post" id="pet-select">
+      <div>
+
+      page_interne <input type = "radio" id = "page_interne" name = "lienpage" value = "1" checked="checked" onclick = "insert_aside()">
+
+      page_externe <input type = "radio" id = "page_externe" name = "lienpage" value = "2" onclick = "insert_aside()">
+ 
+      </div>
+
+      <div id = "pet-select">
+
+      <select name = "pet-select" id="pet-select">
    
       <?php
       for($a = 0; $a <= count($mylink)-1; $a++){ 
@@ -164,6 +175,12 @@ class aside extends \data\sql{
       }
       ?>
 </select>
+    </div>
+
+    <div id = "link_externe">
+     lien externe
+     <input type = "text" name = "link_cat">
+    </div>
 
       </div>
 
@@ -173,7 +190,7 @@ class aside extends \data\sql{
     </div>
     <div>
 
-    <select name = "link_cat">
+    <select name = "link_section">
       <?php
       
       for($a1 = 0;  $a1 <= count($mysection)-1; $a1++ ){
@@ -213,16 +230,38 @@ class aside extends \data\sql{
         
         if(isset($_GET['aside']) && !empty($_GET['aside'])){
 
-                
-          $wpdb->insert($aside, array(
-            'name_link' => $_POST['name_link'],
-            'link_page' => $_POST['link_post'],
-            'section' => 'test', // ... and so on
-        ));
+     
+          if(isset($_POST['lienpage']) && !empty($_POST['lienpage'])){
+
+            $link_page = null;
+      
+            if($_POST['lienpage'] == 1){
+             
+                $link = $_POST['pet-select'];
+            
+             }
+             if($_POST['lienpage'] == 2){
+
+            $link = $_POST['link_cat'];
+             
+          }
+       
+          
+            
+          }
 
       
-
+          $wpdb->insert($aside, array(
+            'name_link' => $_POST['name_link'],
+            'link_page' => $link,
+            'section' => $_POST['link_section'],
+             'type_link'=> $_POST['lienpage'],
+            
         
+        ));
+      
+
+      
 
         }
 
