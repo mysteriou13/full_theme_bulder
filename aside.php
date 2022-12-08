@@ -83,8 +83,9 @@ class aside extends \data\sql{
       
        $header = $wpdb->prefix."aside"; 
 
-       
-        $mylink = $wpdb->get_results("SELECT * FROM ".$header." WHERE `section`='$section'");
+         $mylink = $wpdb->get_results("SELECT * FROM ".$header." WHERE `section`='$section'");
+
+
 
         $a = 0;
 
@@ -92,10 +93,28 @@ class aside extends \data\sql{
 
         for($a = 0;  $a <= $count; $a++){
 
+
+        $type = $mylink[$a]->type_link;
+
+          if($type == 1){
+
+            $lien = site_url()."?p=".$mylink[$a]->link_page;
+
+            $target = null;
+
+          }
+         
+          if($type ==2){
+
+            $lien = $mylink[$a]->link_page;
+
+            $target = 'target= "_blank" ';
+
+          }
          
            ?>
            <div>
-           <a class = "<?php echo $class ?>" href = "<?php  echo site_url()."?p=".$mylink[$a]->link_page; ?>"> <?php echo $mylink[$a]->name_link?> </a>
+           <a class = "<?php echo $class ?>" href = "<?php  echo $lien; ?>" <?php echo $target; ?>> <?php echo $mylink[$a]->name_link?> </a>
            </div>
            <?php
 
