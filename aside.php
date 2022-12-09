@@ -45,10 +45,11 @@ class aside extends \data\sql{
 
     for($a == 0; $a <= count($tab_section); $a++){
 
-        echo $tab_section[$a];
+        echo "<div> <div>".$tab_section[$a]->name_section."</div>";
 
      $this->liste_aside($tab_section[$a],'link_aside');
      
+     echo "</div>";
     }
 
     }
@@ -59,8 +60,7 @@ class aside extends \data\sql{
       
       $header = $wpdb->prefix."section"; 
 
-      
-       $section = $wpdb->get_results("SELECT name_section FROM ".$header);
+       $section = $wpdb->get_results("SELECT * FROM ".$header);
 
        $table_section = array();
 
@@ -68,11 +68,11 @@ class aside extends \data\sql{
 
        for($a == 0; $a !== count($section); $a++){
         
-        array_push($table_section,$section[$a]->name_section);
+        array_push($table_section,$section[$a]);
 
        }
        
-       return $table_section;       
+       return $section;       
 
     }
 
@@ -80,18 +80,17 @@ class aside extends \data\sql{
       {
 
         global $wpdb;
-      
-       $header = $wpdb->prefix."aside"; 
 
-         $mylink = $wpdb->get_results("SELECT * FROM ".$header." WHERE `section`='$section'");
+       $table_aside = $wpdb->prefix."aside"; 
 
-
+         $mylink = $wpdb->get_results("SELECT * FROM ".$table_aside." WHERE section = $section->id ");
 
         $a = 0;
 
-        $count = count($mylink)-1;
+        $count = count($mylink);
 
-        for($a = 0;  $a <= $count; $a++){
+      
+        for($a = 0;  $a < $count; $a++){
 
 
         $type = $mylink[$a]->type_link;
