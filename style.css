@@ -1,7 +1,7 @@
 .card_post {
-  margin-right: 3vh;
+  margin-right: 4%;
   background-color: rgba(43, 60, 89, 0.37);
-  width: 23vh;
+  width: 21%;
   padding-bottom: 9%;
   border-bottom-right-radius: 111px 111px;
   border-bottom-left-radius: 111px 111px; }
@@ -19,10 +19,10 @@
 
 .ligne_card_box {
   margin-bottom: 11%;
-  width: 100vh; }
+  width: 100%; }
 
 .card_image_post {
-  width: 23vh;
+  width: 100%;
   height: 23vh; }
 
 .img {

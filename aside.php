@@ -113,7 +113,7 @@ class aside extends \data\sql{
          
            ?>
            <div>
-           <a class = "<?php echo $class ?>" href = "<?php  echo $lien; ?>" <?php echo $target; ?>> <?php echo $mylink[$a]->name_link?> </a>
+           <a class = "<?php echo $class ?>" href = "<?php  echo $lien; ?>" <?php echo $target; ?>>- <?php echo $mylink[$a]->name_link?> </a>
            </div>
            <?php
 
@@ -215,7 +215,7 @@ class aside extends \data\sql{
 
         ?>
 
-<option value="<?php echo $mysection[$a1]->name_section?>"><?php echo $mysection[$a1]->name_section;?></option>
+<option value="<?php echo $mysection[$a1]->id?>"><?php echo $mysection[$a1]->name_section;?></option>
 
         <?php
 
@@ -268,7 +268,6 @@ class aside extends \data\sql{
             
           }
 
-      
           $wpdb->insert($aside, array(
             'name_link' => $_POST['name_link'],
             'link_page' => $link,
