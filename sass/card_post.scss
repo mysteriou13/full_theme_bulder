@@ -9,8 +9,8 @@
 
     padding-bottom: 9%;
 
-    border-bottom-right-radius: 300px 300px;
-    border-bottom-left-radius: 300px 300px;
+    border-bottom-right-radius: 400px 400px;
+    border-bottom-left-radius: 400px 400px;
 
     @media  (max-width: 400px) {
 
@@ -18,5 +18,8 @@
         margin-bottom:6%;
         position: relative;
         left: 2%;
+
+        border-bottom-right-radius: 300px 300px;
+    border-bottom-left-radius: 300px 300px;
     }
 }
