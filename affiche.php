@@ -81,7 +81,7 @@ class afficher extends \data\sql{
    $c = 0;
 
 
-   echo "<div class = 'd-flex justify-content-around'>";
+   echo "<div class = 'divpage'>";
 
    for($c = 0; $c  <= $cout_page; $c++){
 
@@ -123,7 +123,7 @@ class afficher extends \data\sql{
 
 
   for($i = 0; $i < count($tab_ligne); $i++) { 
-   echo "<div class = 'd-flex ligne_card_box'>";
+   echo "<div class = ' ligne_card_box'>";
    
    
    foreach($tab_ligne[$keys[$i]] as $key => $value) { 

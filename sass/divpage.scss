@@ -1,0 +1,13 @@
+.divpage{
+
+display: flex;
+justify-content: space-around;
+
+@media (max-width:400px) {
+
+    position: relative;
+    left: -9%;
+    
+}
+
+}

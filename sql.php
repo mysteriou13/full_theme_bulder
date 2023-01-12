@@ -316,7 +316,7 @@ echo "<a href='.$logout.'>Logout</a>";
                 
              echo "<div class = 'card_image_post' >";
 
-             echo "<a href class = '".get_permalink($value->object_id)."'>";
+             echo "<a href = '".get_permalink($value->object_id)."'>";
         
              $url = wp_get_attachment_url( get_post_thumbnail_id($value->object_id), 'thumbnail' );
         

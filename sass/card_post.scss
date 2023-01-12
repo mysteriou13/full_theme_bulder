@@ -4,11 +4,19 @@
 
     background-color: rgba(43,60,89,.37);
 
-    width: 18%;
+    width: 17%;
 
 
     padding-bottom: 9%;
 
-    border-bottom-right-radius: 400px 400px;
-    border-bottom-left-radius: 400px 400px;
+    border-bottom-right-radius: 300px 300px;
+    border-bottom-left-radius: 300px 300px;
+
+    @media  (max-width: 400px) {
+
+        width: 100%;
+        margin-bottom:6%;
+        position: relative;
+        left: 2%;
+    }
 }

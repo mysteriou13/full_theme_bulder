@@ -1,4 +1,12 @@
 .ligne_card_box{
-    margin-bottom: 11%;
+    margin-bottom: 4%;
     width: 100%;
+
+    display: flex;
+
+     @media (max-width: 400px) {
+
+        display: block;
+        
+     }
 }
