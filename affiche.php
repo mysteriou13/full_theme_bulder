@@ -22,6 +22,8 @@ class afficher extends \data\sql{
        
     }
 
+    /*menu categeroy*/
+
     function affiche_liste_category(){
 
       $categories = get_categories( array(
@@ -50,20 +52,26 @@ class afficher extends \data\sql{
     }
 
   
-   
+   /*affchage des card post  dans la page d'acceuil*/
+
     function affiche_liste_post(){
 
+      /*recuperation des post*/
    $post =  $this->liste_post();
 
     $count = count($post)-1;
 
     $c = 0;
 
+    /*nombre d 'element par ligje*/
     $el = 4;
 
+    /*   nombre de card par page*/
     $el_page = 20;
 
     $tab = [];
+
+    /* ajout des post id dans dan le tab*/
 
     for($c = 0; $c <= $count; $c++){
 
@@ -71,6 +79,7 @@ class afficher extends \data\sql{
 
     }
 
+   /*element par par page*/
 
    $tab_page = array_chunk($tab,$el_page);
 
@@ -80,6 +89,7 @@ class afficher extends \data\sql{
 
    $c = 0;
 
+   /*parcourir les page*/
 
    echo "<div class = 'divpage'>";
 
@@ -114,6 +124,8 @@ class afficher extends \data\sql{
 
    }
 
+   /*ligne des page*/
+
   $tab_ligne = array_chunk($tab_page[$nbpage],$el);
 
 
@@ -121,7 +133,7 @@ class afficher extends \data\sql{
 
   $keys = array_keys($tab_ligne); 
 
-
+  /*boucle affichage des post dans la page d'acceuil*/
   for($i = 0; $i < count($tab_ligne); $i++) { 
    echo "<div class = ' ligne_card_box'>";
    
