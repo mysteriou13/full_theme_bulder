@@ -8,7 +8,7 @@ require $full_theme_hiki.'/vendor/phpmailer/phpmailer/src/Exception.php';
 require $full_theme_hiki.'/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require $full_theme_hiki.'/vendor/phpmailer/phpmailer/src/SMTP.php';
  
-require $full_theme_hiki."./config.php";
+// require $full_theme_hiki."./config.php";
 
 class mail extends PHPMailer{
         
