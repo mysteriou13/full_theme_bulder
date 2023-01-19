@@ -142,13 +142,16 @@ function insert_into_posts($id, $post_author, $post_date, $post_date_gmt, $post_
 
 function read_posts_file($filepath)
 {
+  include $filepath;
   global $wpdb;
-  $file = fopen($filepath, "r") or die("Unable to open file!");
-  $data = fread($file, filesize($filepath));
-  dbDelta($data);
-  fclose($file);
+  // $file = fopen($filepath, "r") or die("Unable to open file!");
+  // $data = fread($file, filesize($filepath));
+  // dbDelta($data);
+  // fclose($file);
 }
 
 read_posts_file(__DIR__ . "/wor1848_posts.sql");
+// $path = __DIR__ . "/wor1848_posts.sql";
+// exec("wp db import {$path}");
 
 ?>
