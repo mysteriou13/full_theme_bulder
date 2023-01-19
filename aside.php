@@ -41,16 +41,16 @@ class aside extends \data\sql{
 
       $tab_section = $this->liste_section();
       
-    $a = 0;
+      $a = 0;
 
-    for($a == 0; $a <= count($tab_section); $a++){
+      for($a = 0; $a < count($tab_section); $a++){
 
-        echo "<div> <div>".$tab_section[$a]->name_section."</div>";
+          echo "<div> <div>".$tab_section[$a]->name_section."</div>";
 
-     $this->liste_aside($tab_section[$a],'link_aside');
-     
-     echo "</div>";
-    }
+      $this->liste_aside($tab_section[$a],'link_aside');
+      
+      echo "</div>";
+      }
 
     }
 
