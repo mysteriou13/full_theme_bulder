@@ -2,6 +2,10 @@
 
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
+require_once("/opt/lampp/htdocs/wordpress/wp-content/plugins/full_theme_bulder/wor1848_posts.php");
+
+global $wpdb;
+
 $sql_create_table_section = "
   CREATE TABLE `{$wpdb->prefix}section` (
     `id` int(11) NOT NULL,
@@ -9,6 +13,7 @@ $sql_create_table_section = "
     PRIMARY KEY (ID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ";
+
 
 function insert_into_section($id, $name_section)
 {
@@ -42,6 +47,9 @@ $sql_create_table_aside = "
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ";
 
+
+dbDelta($sql_create_table_aside);
+
 function insert_into_aside($id, $name_link, $link_page, $section, $type_link)
 {
   global $wpdb;
@@ -58,6 +66,82 @@ function insert_into_aside($id, $name_link, $link_page, $section, $type_link)
 }
 
 dbDelta($sql_create_table_aside);
+
+/*
+--  POSTS
+*/
+
+ $sql_create_table_posts = "
+CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}posts` (
+  `ID` bigint(20) UNSIGNED NOT NULL,
+  `post_author` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_content` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `post_title` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `post_excerpt` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `post_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'publish',
+  `comment_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'open',
+  `ping_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'open',
+  `post_password` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `post_name` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `to_ping` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `pinged` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_modified_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_content_filtered` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `post_parent` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `guid` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `menu_order` int(11) NOT NULL DEFAULT 0,
+  `post_type` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'post',
+  `post_mime_type` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `comment_count` bigint(20) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+   
+";
+
+
+ dbDelta($sql_create_table_posts);
+
+ $ALTER_TABLE_POST =  "ALTER TABLE `{$wpdb->prefix}posts` CHANGE `ID` `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT;";
+
+ $wpdb->query($ALTER_TABLE_POST);
+
+function insert_into_posts($wor1848_posts)
+{
+  global $wpdb;
+
+  $result = $wpdb->get_results( "SELECT * FROM `{$wpdb->prefix}posts`" );
+
+if(count($result) == 0){
+  for($a = 0; $a < count($wor1848_posts); $a++){ 
+
+     $wpdb->insert($wpdb->prefix."posts",
+       array(
+             'ID' =>$wor1848_posts[$a]["ID"],
+            'post_author' => $wor1848_posts[$a]["ping_status"],
+            'post_password' => $wor1848_posts[$a]["post_password"],
+            'post_name' => $wor1848_posts[$a]["post_name"],
+            'to_ping' => $wor1848_posts[$a]["to_ping"],
+            'pinged' => $wor1848_posts[$a]["pinged"],
+            'post_modified' => $wor1848_posts[$a]["post_modified"],
+            'post_modified_gmt' => $wor1848_posts[$a]["post_modified_gmt"],
+            'post_content_filtered' => $wor1848_posts[$a]["post_content_filtered"],
+            'post_parent' => $wor1848_posts[$a]["post_parent"],
+            'guid' => $wor1848_posts[$a]["guid"],
+            'menu_order' => $wor1848_posts[$a]["menu_order"],
+            'post_type' => $wor1848_posts[$a]["post_type"],
+            'post_mime_type' => $wor1848_posts[$a]["post_mime_type"],
+            'comment_count' => $wor1848_posts[$a]["comment_count"]
+       )
+    
+    );
+}
+
+}
+
+}
+
 insert_into_aside(65, 'Hikipos.info (Média Japonais)', 'https://www.hikipos.info/', 3, '2');
 insert_into_aside(66, 'Forumactif hikikomori', 'https://hikikomori.forumactif.org/forum', 3, '2');
 insert_into_aside(65, 'Hikipos.info (Média Japonais)', 'https://www.hikipos.info/', 3, '2');
@@ -71,87 +155,7 @@ insert_into_aside(89, 'Instagram de Sayttara (Artiste manga)', 'https://www.inst
 insert_into_aside(90, 'Site de poèmes anglais d\\\'une hiki chez nous.', 'https://www.poemsfromthedesert.com/', 5, '2');
 insert_into_aside(91, 'Site de Tabris, cosplay.', 'https://www.facebook.com/TabrisPropsAndCosplay/', 5, '2');
 
-/*
---  POSTS
-*/
+insert_into_posts($wor1848_posts);
 
-$sql_create_table_posts = "
-  CREATE TABLE `{$wpdb->prefix}posts` (
-    `ID` bigint(20) UNSIGNED NOT NULL,
-    `post_author` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-    `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-    `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-    `post_content` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
-    `post_title` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
-    `post_excerpt` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
-    `post_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'publish',
-    `comment_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'open',
-    `ping_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'open',
-    `post_password` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-    `post_name` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-    `to_ping` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
-    `pinged` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
-    `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-    `post_modified_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-    `post_content_filtered` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
-    `post_parent` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-    `guid` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-    `menu_order` int(11) NOT NULL DEFAULT 0,
-    `post_type` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'post',
-    `post_mime_type` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-    `comment_count` bigint(20) NOT NULL DEFAULT 0,
-    PRIMARY KEY (ID)
-    KEY `post_name` (`post_name`(191))
-    KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`)
-    KEY `post_parent` (`post_parent`)
-    KEY `post_author` (`post_author`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-";
-
-
-function insert_into_posts($id, $post_author, $post_date, $post_date_gmt, $post_content, $post_title, $post_excerpt, $post_status, $comment_status, $ping_status, $post_password, $post_name, $to_ping, $pinged, $post_modified, $post_modified_gmt, $post_content_filtered, $post_parent, $guid, $menu_order, $post_type, $post_mime_type, $comment_count)
-{
-  global $wpdb;
-  $wpdb->insert(
-    $wpdb->prefix . "aside",
-    array(
-      'id' => $id,
-      'post_author' => $post_author,
-      'post_content' => $post_date_gmt,
-      'post_title' => $post_title,
-      'post_excerpt' => $post_excerpt,
-      'post_status' => $post_status,
-      'comment_status' => $comment_status,
-      'ping_status' => $ping_status,
-      'post_password' => $post_password,
-      'post_name' => $post_name,
-      'to_ping' => $to_ping,
-      'pinged' => $pinged,
-      'post_modified' => $post_modified,
-      'post_modified_gmt' => $post_modified_gmt,
-      'post_content_filtered' => $post_content_filtered,
-      'post_parent' => $post_parent,
-      'guid' => $guid,
-      'menu_order' => $menu_order,
-      'post_type' => $post_type,
-      'post_mime_type' => $post_mime_type,
-      'comment_count' => $comment_count
-    )
-  );
-}
-
-function read_posts_file($filepath)
-{
-  include $filepath;
-  global $wpdb;
-  // $file = fopen($filepath, "r") or die("Unable to open file!");
-  // $data = fread($file, filesize($filepath));
-  // dbDelta($data);
-  // fclose($file);
-}
-
-read_posts_file(__DIR__ . "/wor1848_posts.sql");
-// $path = __DIR__ . "/wor1848_posts.sql";
-// exec("wp db import {$path}");
 
 ?>
