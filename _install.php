@@ -2,7 +2,7 @@
 
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-require_once("/opt/lampp/htdocs/wordpress/wp-content/plugins/full_theme_bulder/wor1848_posts.php");
+require_once("wor1848_posts.php");
 
 global $wpdb;
 
